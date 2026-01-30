@@ -1,9 +1,25 @@
+# Python
 __pycache__/
 *.py[cod]
 
-# local db
+# Django
 db.sqlite3
+*.log
+staticfiles/
 
 # JetBrains
 .idea/
 *.iml
+
+# Environment / secrets
+.env
+.env.*
+venv/
+.venv/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

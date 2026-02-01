@@ -4,7 +4,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from store.admin import ProductAdmin
 from store.models import Product
 from tags.models import TaggedItem
-from store.models import User
+from .models import User
 from django.utils.translation import gettext_lazy as _
 
 

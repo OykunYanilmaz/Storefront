@@ -9,9 +9,16 @@ from . import views
 router = routers.DefaultRouter()
 router.register('products', views.ProductViewSet, basename='products')
 router.register('collections', views.CollectionViewSet)
+router.register('carts', views.CartViewSet, basename='carts')
 
-products_router = routers.NestedDefaultRouter(router, 'products', lookup='product')
+# for url in router.urls:
+#     print(url)
+
+products_router = routers.NestedDefaultRouter(router, 'products', lookup='product')  # product_pk
 products_router.register('reviews', views.ReviewViewSet, basename='product-reviews')
+
+carts_router = routers.NestedDefaultRouter(router, 'carts', lookup='cart')
+carts_router.register('items', views.CartItemViewSet, basename='cart-items')  # cart-items-list and cart-items-detail
 
 # URLconf
 # urlpatterns = [
@@ -27,6 +34,6 @@ products_router.register('reviews', views.ReviewViewSet, basename='product-revie
 # ]
 
 # urlpatterns = router.urls
-urlpatterns = router.urls + products_router.urls
+urlpatterns = router.urls + products_router.urls + carts_router.urls
 # path(r'', include(router.urls)),
 # path(r'', include(products_router.urls)),

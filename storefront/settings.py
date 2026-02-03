@@ -104,10 +104,12 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'storefront2',
+        # 'NAME': 'storefront2',
+        'NAME': 'storefront3',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'Mysql_84'
+        # 'PASSWORD': 'Mysql_84'
+        'PASSWORD': 'P@ssword'
     }
 }
 
@@ -189,3 +191,5 @@ DEFAULT_FROM_EMAIL = 'from@buybuy.com'
 ADMINS = [
     ('Oykun', 'admin@buybuy.com')
 ]
+
+CELERY_BROKER_URL = 'redis://localhost:6379/1'

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail, mail_admins, BadHeaderError, EmailMessage
 from django.db.models import Q, F, Value, Func, ExpressionWrapper, DecimalField
 from django.db.models.functions import Concat
 from django.db.models.aggregates import Count, Max, Min, Avg, Sum
@@ -129,13 +130,24 @@ def say_hello(request):
     #     item.save()
 
     # Executing Raw SQL Queries
-    queryset = Product.objects.raw("SELECT id, title FROM store_product")
+    # queryset = Product.objects.raw("SELECT id, title FROM store_product")
     # with connection.cursor() as cursor:
     #     cursor.execute("")
     #     cursor.callproc("get_customers", [1, 2, 'a'])  # sp
 
     # return HttpResponse("Hello World")
     # return render(request, "hello.html", {"name": "Oykun", "orders": list(queryset)})
-    return render(request, "hello.html", {"name": "Oykun", "result": list(queryset)})
+    # return render(request, "hello.html", {"name": "Oykun", "result": list(queryset)})
     # return render(request, "hello.html", {"name": "Oykun", "tags": list(queryset)})
     # return render(request, "hello.html", {"name": "Oykun"})
+
+    try:
+        # send_mail('subject', 'message', 'info@buybuy.com', ['bob@buybuy.com'])
+        # mail_admins('subject', 'message', html_message='message')
+        message = EmailMessage('subject', 'message', 'from@buybuy.com', ['john@buybuy.com'])
+        message.attach_file('playground/static/images/dog.jpg')
+        message.send()
+    except BadHeaderError:
+        pass
+
+    return render(request, "hello.html", {"name": "Oykun"})

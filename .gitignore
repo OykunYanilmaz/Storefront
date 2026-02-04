@@ -24,5 +24,7 @@ venv/
 .DS_Store
 Thumbs.db
 
+# Folders and Files
 /media/
 /static/
+general.log

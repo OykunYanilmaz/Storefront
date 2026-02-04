@@ -19,6 +19,7 @@ redis = "*"
 django-templated-mail = "*"
 flower = "*"
 django-redis = "*"
+whitenoise = "*"
 
 [dev-packages]
 autopep8 = "*"

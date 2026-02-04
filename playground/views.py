@@ -10,6 +10,7 @@ from django.db import transaction, connection
 from django.contrib.contenttypes.models import ContentType
 from store.models import Product, OrderItem, Order, Customer, Collection
 from tags.models import TaggedItem
+from .tasks import notify_customers
 
 # Create your views here.
 
@@ -142,21 +143,26 @@ def say_hello(request):
     # return render(request, "hello.html", {"name": "Oykun", "tags": list(queryset)})
     # return render(request, "hello.html", {"name": "Oykun"})
 
-    try:
-        # send_mail('subject', 'message', 'info@buybuy.com', ['bob@buybuy.com'])
-        # mail_admins('subject', 'message', html_message='message')
+    ### Sending Emails Section ###
+    # try:
+    #     # send_mail('subject', 'message', 'info@buybuy.com', ['bob@buybuy.com'])
+    #     # mail_admins('subject', 'message', html_message='message')
 
-        # message = EmailMessage('subject', 'message', 'from@buybuy.com', ['john@buybuy.com'])
-        # message.attach_file('playground/static/images/dog.jpg')
-        # message.send()
+    #     # message = EmailMessage('subject', 'message', 'from@buybuy.com', ['john@buybuy.com'])
+    #     # message.attach_file('playground/static/images/dog.jpg')
+    #     # message.send()
 
-        message = BaseEmailMessage(
-            template_name='emails/hello.html',
-            context={'name': 'Oykun'}
-        )
-        message.send(['john@buybuy.com'])
+    #     message = BaseEmailMessage(
+    #         template_name='emails/hello.html',
+    #         context={'name': 'Oykun'}
+    #     )
+    #     message.send(['john@buybuy.com'])
 
-    except BadHeaderError:
-        pass
+    # except BadHeaderError:
+    #     pass
+
+    ### Sending Emails Section ###
+    notify_customers.delay('Hello')
 
     return render(request, "hello.html", {"name": "Oykun"})
+    ### Sending Emails Section ###

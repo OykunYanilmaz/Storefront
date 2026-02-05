@@ -4,6 +4,15 @@ DEBUG = True
 
 SECRET_KEY = 'django-insecure-s*vq+2768$4_m_h5aspswh!3kdr0&p(^%@vlcgyi5)lt9#2$ad'
 
+INSTALLED_APPS += ['silk', 'debug_toolbar']
+
+if DEBUG:
+    MIDDLEWARE = [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        'silk.middleware.SilkyMiddleware',
+        *MIDDLEWARE,
+    ]
+
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
